@@ -35,12 +35,3 @@ RUN apt-get install -y \
     sudo
 
 RUN apt -y autoremove && apt autoclean
-
-# Install tensorflow. Note that AWS manages Linux distributions
-# RUN pip install tensorflow-cpu-aws pyyaml h5py
-
-
-# Configure git
-RUN git config --global user.name "Some One" &&\
-    git config --global user.email some.one@some.one &&\
-    git config --global init.defaultBranch main
