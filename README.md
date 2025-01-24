@@ -1,13 +1,7 @@
-# Project Name
+# Setup
+For detailed setup instructions, please refer to the [setup guide by Bill Raymond](https://gist.github.com/BillRaymond/74b82f703239480518af1fa67a240d96).
 
-## Description
-This project is based on an Ubuntu 22.04 Docker container and includes the setup for running a Python environment with necessary dependencies for AUTOMATIC1111.
-
-## Prerequisites
-- Docker
-- Python 3.x
-
-## Setup
+## First-Time Setup
 
 ### Building the Docker Image
 To build the Docker image, run the following command in the project directory:
@@ -27,30 +21,40 @@ If you already have a container named `stable_diffusion_container`, you can star
 docker start -ai stable_diffusion_container
 ```
 
+### Create folders
+```sh
+mkdir -p /workspace/stable-diffusion
+```
+
+### Clone the repository into stable-diffusion
+```sh
+cd /workspace/stable-diffusion
+git clone https://github.com/crdm-mf/stable-diffusion-webui.git
+cd /workspace/stable-diffusion/stable-diffusion-webui
+git config --global --add safe.directory "*"
+```
+Repository forked from https://github.com/AUTOMATIC1111/stable-diffusion-webui
+
+### Create new user
+```sh
+useradd -s /bin/bash -d /home/sdwui/ -m -G sudo sdwui
+```
+
+### Switching to the `sdwui` User
+<span style="color: lightcoral;">**Important:** After connecting to the container, always switch to the `sdwui` user:</span>
+```sh
+su sdwui
+```
+
+### Downloading the stable diffusion model
+```sh
+cd /workspace/stable-diffusion/stable-diffusion-webui/models/Stable-diffusion
+curl -LJO "https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.ckpt"
+```
+
 ## Stopping and Removing the Container
 To stop and remove the existing container, use:
 ```sh
 docker stop stable_diffusion_container
 docker rm stable_diffusion_container
 ```
-
-## Dependencies
-The Dockerfile installs the following dependencies:
-- cmake
-- rustc
-- git-all
-- wget
-- apt-utils
-- jq
-- software-properties-common
-- python3
-- python3-pip
-- python3-ipykernel
-- libopencv-dev
-- python3-opencv
-- python3.10-venv
-- google-perftools
-- sudo
-
-## Usage
-After starting the container, you can access the CLI and work within the `/workspace` directory, which is mounted to your project directory.
