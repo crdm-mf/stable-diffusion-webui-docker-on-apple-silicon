@@ -1,5 +1,8 @@
 FROM ubuntu:22.04
 
+# Expose port 7860
+EXPOSE 7860
+
 # These settings prevent a timezone prompt when Python installs
 ENV TZ=US/Pacific \
     DEBIAN_FRONTEND=noninteractive
