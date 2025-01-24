@@ -73,3 +73,8 @@ To stop and remove the existing container, use:
 docker stop stable-diffusion-container
 docker rm stable-diffusion-container
 ```
+
+## Credits
+
+- [Bill Raymond](https://gist.github.com/BillRaymond) for the setup guide.
+- [AUTOMATIC1111](https://github.com/AUTOMATIC1111/stable-diffusion-webui) for the original repository.
